@@ -37,6 +37,30 @@ class PokemonSerializer(serializers.ModelSerializer):
         model = core.models.Pokemon
         fields = ('url', 'id', 'name', 'height', 'weight', 'abilities')
 
+    
+    def _get_or_create_abilities(self, pokemon, abilities_validated_data):
+        ability_list = []
+        
+        for ability_data in abilities_validated_data:
+            ability, created = pokemon.abilities.get_or_create(name=ability_data['name'])
+            ability_list.append(ability)
+        
+        pokemon.abilities.set(ability_list, clear=True)
+        pokemon.save()
+        return pokemon
+
+    def create(self, validated_data):
+        abilities_data = validated_data.pop('abilities')
+        pokemon =  super().create(validated_data)
+        pokemon = self._get_or_create_abilities(pokemon, abilities_data)
+        return pokemon
+
+    def update(self, instance, validated_data):
+        abilities_data = validated_data.pop('abilities')
+        pokemon = super().update(instance, validated_data)
+        pokemon = self._get_or_create_abilities(pokemon, abilities_data)
+        return pokemon
+
 
 class PokemonTeamSerializer(serializers.HyperlinkedModelSerializer):
     """Serialize the PokemonTeam model.
@@ -46,7 +70,7 @@ class PokemonTeamSerializer(serializers.HyperlinkedModelSerializer):
     """
 
     POKEMON_LIMIT = 6
-    
+
     class Meta:
         model = core.models.PokemonTeam
         fields = ('url', 'owner', 'pokemons')
