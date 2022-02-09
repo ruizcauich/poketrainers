@@ -1,0 +1,5 @@
+poketrainers/.env
+*.idea/
+*.git
+*.gitignore
+*db.sqlite3
