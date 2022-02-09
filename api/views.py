@@ -22,7 +22,7 @@ class PokemonTeamViewSet(viewsets.ModelViewSet):
 
     @decorators.action(
         methods=['GET', 'POST'],
-        url_path=r'', 
+        url_path=r'pokemon', 
         detail=True
     )
     @transaction.atomic
