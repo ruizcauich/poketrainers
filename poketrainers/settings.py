@@ -66,6 +66,26 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100
 }
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {
+            'format': '%(levelname)-8s %(asctime)s %(name)-18s %(message)s'
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console'
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+}
+
 
 ROOT_URLCONF = 'poketrainers.urls'
 
