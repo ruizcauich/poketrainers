@@ -44,7 +44,7 @@ There are some environment variables you can set to the **docker run** command i
 ### Run manually
 If your choice is to run manually, follow the these steps:
 
-1. One inside the project directory (poketrainers), create a new virtual environment (You need python3.8 to run this project) and activate it.
+1. Once inside the project directory (poketrainers), create a new virtual environment (You need python3.8 to run this project) and activate it.
 ```
 $ python -m venv venv
 $ source venv/bin/activate
@@ -53,7 +53,7 @@ $ source venv/bin/activate
 2. Use pip to install the required packages
 `$ pip install -r requirements.txt`
 
-3. To avoid setting manually the environment variables need by the settings, create a .env file inside of the sub directory poketrainers, at the same level of the settings.py file as you can see below.
+3. To avoid manually setting the environment variables required by the settings.py, create a **.env** file inside of the subdirectory poketrainers, at the same level of the settings.py file as you can see below.
 
 ```
 .
